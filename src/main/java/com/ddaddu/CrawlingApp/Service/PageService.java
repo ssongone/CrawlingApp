@@ -20,6 +20,7 @@ public class PageService {
         return amazonPage.getId();
     }
 
+
     public Optional<AmazonPage> findOne(Long memberId) {
         return pageRepository.findById(memberId);
     }

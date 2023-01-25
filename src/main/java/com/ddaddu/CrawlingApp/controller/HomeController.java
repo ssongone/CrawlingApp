@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+
 @Controller
 public class HomeController {
     private PageService pageService;
@@ -22,10 +24,10 @@ public class HomeController {
     }
 
     @PostMapping("/pages/new")
-    public String create(PageForm form) {
-
+    public String create(PageForm form) throws IOException {
         AmazonPage amazonPage = new AmazonPage();
         amazonPage.setPageUrl(form.getPageUrl());
+        amazonPage.setImgUrls();
         pageService.makePage(amazonPage);
 
         return "redirect:/";

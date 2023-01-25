@@ -1,10 +1,13 @@
 package com.ddaddu.CrawlingApp.Domain;
 
+import java.io.IOException;
+import java.util.List;
+
 public class AmazonPage {
 
     private Long id;
     private String pageUrl;
-    //private ImgUrls imgUrls;
+    private ImgUrls imgUrls;
 
     public Long getId() {
         return id;
@@ -20,6 +23,13 @@ public class AmazonPage {
     public void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
     }
+
+    public void setImgUrls() {
+        Crawling crawling = new Crawling(pageUrl);
+        crawling.makeImgUrl();
+        imgUrls = new ImgUrls(crawling.imgUrls);
+    }
+
 
 
 }
