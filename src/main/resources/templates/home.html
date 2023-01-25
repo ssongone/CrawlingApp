@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+    #input {
+    	width: 1000px;
+        height: 50px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom : 3px solid black;
+    }
+    #inputButton {
+    	width: 100px;
+        height: 55px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom : 3px solid black;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1>따뚜 크롤링 App</h1>
+        <form action="/pages/new" method="post">
+            <input id="input" type="text" placeholder="사이트 주소를 입력하세요" />
+            <input id="inputButton" type="submit" value="입력" />
+        </form>
+
+
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
