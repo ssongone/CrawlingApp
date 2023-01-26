@@ -1,7 +1,7 @@
 package com.ddaddu.CrawlingApp.controller;
 
 import com.ddaddu.CrawlingApp.Domain.AmazonPage;
-import com.ddaddu.CrawlingApp.Domain.ImgUrl;
+import com.ddaddu.CrawlingApp.Domain.ExcelFile;
 import com.ddaddu.CrawlingApp.Service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -42,6 +41,12 @@ public class HomeController {
 
         pageService.makePage(amazonPage);
 
+        return "redirect:/";
+    }
+    @GetMapping("/excel")
+    public String makeExcelFile() {
+        ExcelFile excelFile = new ExcelFile();
+        excelFile.fileOpen();
         return "redirect:/";
     }
 
