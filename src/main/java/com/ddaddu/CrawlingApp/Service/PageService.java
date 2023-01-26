@@ -27,7 +27,7 @@ public class PageService {
     }
 
 
-    public List<AmazonPage> findMembers() {
+    public List<AmazonPage> findAllPages() {
         return pageRepository.findAll();
     }
 }

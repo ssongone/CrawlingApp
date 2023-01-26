@@ -30,6 +30,7 @@ public class HomeController {
         AmazonPage amazonPage = new AmazonPage();
         amazonPage.setPageUrl(form.getPageUrl());
 
+        //try catch 수정 필요
         try{
             amazonPage.setImgUrls();
         }catch(Exception e){
@@ -45,6 +46,7 @@ public class HomeController {
     }
     @GetMapping("/excel")
     public String makeExcelFile() {
+        List<AmazonPage> pages = pageService.findAllPages()
         ExcelFile excelFile = new ExcelFile();
         excelFile.fileOpen();
         return "redirect:/";
@@ -52,7 +54,7 @@ public class HomeController {
 
     @GetMapping("/pages")
     public String list(Model model) {
-        List<AmazonPage> pages = pageService.findMembers();
+        List<AmazonPage> pages = pageService.findAllPages();
         model.addAttribute("pages", pages);
         return "pages/pageList";
     }
