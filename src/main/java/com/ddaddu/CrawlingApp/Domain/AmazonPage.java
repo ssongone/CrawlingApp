@@ -9,6 +9,11 @@ public class AmazonPage {
     private String pageUrl;
     private ImgUrls imgUrls;
 
+
+    public ImgUrls getImgUrls() {
+        return imgUrls;
+    }
+
     public Long getId() {
         return id;
     }
@@ -24,7 +29,7 @@ public class AmazonPage {
         this.pageUrl = pageUrl;
     }
 
-    public void setImgUrls() {
+    public void setImgUrls() throws IOException {
         Crawling crawling = new Crawling(pageUrl);
         crawling.makeImgUrl();
         imgUrls = new ImgUrls(crawling.imgUrls);

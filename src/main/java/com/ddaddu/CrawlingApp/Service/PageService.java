@@ -4,6 +4,7 @@ import com.ddaddu.CrawlingApp.Domain.AmazonPage;
 import com.ddaddu.CrawlingApp.PageRepository.PageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,7 @@ public class PageService {
     }
 
 
-
-
+    public List<AmazonPage> findMembers() {
+        return pageRepository.findAll();
+    }
 }

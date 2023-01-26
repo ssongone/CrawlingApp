@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>주소</th>
+                <th>이미지주소</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="page : ${pages}">
+                <td th:text="${page.id}"></td>
+                <td th:text="${page.pageUrl}"></td>
+                <td th:text="${page.imgUrls.getFirst()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

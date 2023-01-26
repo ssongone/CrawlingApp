@@ -1,13 +1,16 @@
 package com.ddaddu.CrawlingApp.controller;
 
 import com.ddaddu.CrawlingApp.Domain.AmazonPage;
+import com.ddaddu.CrawlingApp.Domain.ImgUrl;
 import com.ddaddu.CrawlingApp.Service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -24,13 +27,29 @@ public class HomeController {
     }
 
     @PostMapping("/pages/new")
-    public String create(PageForm form) throws IOException {
+    public String create(PageForm form) {
         AmazonPage amazonPage = new AmazonPage();
         amazonPage.setPageUrl(form.getPageUrl());
-        amazonPage.setImgUrls();
+
+        try{
+            amazonPage.setImgUrls();
+        }catch(Exception e){
+            System.out.println("주소가 이상한 거 같아여");
+            e.getMessage();
+            e.printStackTrace();
+            return "redirect:/";
+        }
+
         pageService.makePage(amazonPage);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/pages")
+    public String list(Model model) {
+        List<AmazonPage> pages = pageService.findMembers();
+        model.addAttribute("pages", pages);
+        return "pages/pageList";
     }
 
 }

@@ -14,7 +14,7 @@ class CrawlingTest {
     String url = "https://www.amazon.co.jp/-/en/%E6%96%B0%E6%B5%B7-%E8%AA%A0/dp/4046321903/ref=d_pd_sbs_sccl_2_1/356-0132074-2627358?pd_rd_w=FDmhS&content-id=amzn1.sym.820591ed-a555-4556-9bf6-5ebd5493c69e&pf_rd_p=820591ed-a555-4556-9bf6-5ebd5493c69e&pf_rd_r=YKJT09KZRFTV68BP6556&pd_rd_wg=yJkKj&pd_rd_r=c8939c27-6103-45ed-8767-8e6a6837df46&pd_rd_i=4046321903&psc=1";
 
     @Test
-    void 이미지주소크롤링() {
+    void 이미지주소크롤링() throws IOException {
         Crawling crawling = new Crawling(url);
         crawling.makeImgUrl();
         crawling.getImgUrls().stream()
