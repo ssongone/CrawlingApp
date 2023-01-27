@@ -16,7 +16,7 @@
             <tr th:each="page : ${pages}">
                 <td th:text="${page.id}"></td>
                 <td th:text="${page.pageUrl}"></td>
-                <td th:text="${page.imgUrls.getFirst()}"></td>
+                <td th:text="${page.imgUrls.getMainImgUrl()}"></td>
             </tr>
             </tbody>
         </table>
