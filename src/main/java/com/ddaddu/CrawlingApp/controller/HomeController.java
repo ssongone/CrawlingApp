@@ -47,7 +47,9 @@ public class HomeController {
     @GetMapping("/excel")
     public String makeExcelFile() {
         List<AmazonPage> pages = pageService.findAllPages();
-        ExcelFile excelFile = new ExcelFile(pages.get(0)); //아직 하나만 가능..ㅎㅎ;;
+
+        pages.stream();
+        ExcelFile excelFile = new ExcelFile(pages); //아직 하나만 가능..ㅎㅎ;;
         excelFile.makeExcelFile();
         return "redirect:/";
     }
