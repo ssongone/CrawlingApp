@@ -10,13 +10,6 @@ public class ImgUrls { // 일급 컬렉션으로 만들기~!
         this.imgUrls = imgUrls;
     }
 
-    public int getImgUrlListSize() {
-        return imgUrls.size();
-    }
-    public String getFirst() {
-        return imgUrls.get(0).getImgUrl();
-    }
-
     public String getMainImgUrl() {
         return imgUrls.stream()
                 .filter(ImgUrl::isMainImg)

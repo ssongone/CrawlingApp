@@ -20,12 +20,14 @@ public class Crawling {
         return imgUrls;
     }
 
-    public Crawling(String pageUrl) throws IOException {
+    public Crawling(String pageUrl) {
         this.pageUrl = pageUrl;
-
-        Connection conn = Jsoup.connect(pageUrl);
-        document = conn.get();
-
+        try{
+            Connection conn = Jsoup.connect(pageUrl);
+            document = conn.get();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         imgUrls = new ArrayList<>();
     }
 
