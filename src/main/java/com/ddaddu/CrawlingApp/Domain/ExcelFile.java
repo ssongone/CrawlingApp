@@ -1,7 +1,5 @@
 package com.ddaddu.CrawlingApp.Domain;
 
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,7 +12,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Stream;
+
 
 public class ExcelFile {
 
@@ -24,6 +22,7 @@ public class ExcelFile {
     static final String ORIGIN_FILE_NAME = "1월 생활실용서 일괄.xlsx";
     static final int MAIN_IMG_COLUMN = 17; //R
     static final int SUB_IMG_COLUMN = 18;
+    static final int PRODUCT_INFO_COLUMN = 19;
 
     List<AmazonPage> amazonPages;
 
@@ -68,6 +67,7 @@ public class ExcelFile {
         XSSFRow curRow = sheet.createRow(order);
         curRow.createCell(MAIN_IMG_COLUMN).setCellValue(bookInfo.getMainImgUrl());
         curRow.createCell(SUB_IMG_COLUMN).setCellValue(bookInfo.getSubImgUrl());
+        curRow.createCell(PRODUCT_INFO_COLUMN).setCellValue(bookInfo.getProductInfo());
     }
 
     void fillExcel() {

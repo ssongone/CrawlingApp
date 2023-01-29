@@ -27,21 +27,16 @@ public class HomeController {
 
     @PostMapping("/pages/new")
     public String create(PageForm form) {
-        AmazonPage amazonPage = new AmazonPage();
-        amazonPage.setPageUrl(form.getPageUrl());
-
         //try catch 수정 필요
         try{
-            amazonPage.setImgUrls();
+            AmazonPage amazonPage = new AmazonPage(form.getPageUrl());
+            pageService.makePage(amazonPage);
         }catch(Exception e){
             System.out.println("주소가 이상한 거 같아여");
             e.getMessage();
             e.printStackTrace();
             return "redirect:/";
         }
-
-        pageService.makePage(amazonPage);
-
         return "redirect:/";
     }
     @GetMapping("/excel")
