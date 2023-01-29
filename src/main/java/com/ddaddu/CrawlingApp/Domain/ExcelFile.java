@@ -20,6 +20,7 @@ public class ExcelFile {
     XSSFSheet sheet;
     static final String ORIGIN_FILE_PATH = "/Users/ssongwon/Desktop/springproject/";
     static final String ORIGIN_FILE_NAME = "1월 생활실용서 일괄.xlsx";
+    static final String WINDOWS_FILE_PATH = "C:\\Ddaddu App\\";
     static final int MAIN_IMG_COLUMN = 17; //R
     static final int SUB_IMG_COLUMN = 18;
     static final int PRODUCT_INFO_COLUMN = 19;
@@ -29,7 +30,24 @@ public class ExcelFile {
     public ExcelFile() {}
     public ExcelFile(List<AmazonPage> amazonPages) {
         this.amazonPages = amazonPages;
-        readOriginalFile();
+        //readOriginalFile();
+    }
+
+    public void makeNewExcelFile() {
+        try(FileOutputStream fos = new FileOutputStream(WINDOWS_FILE_PATH + "따뚜 " +calcCurrentTime()+".xlsx")) {
+            workbook = new XSSFWorkbook();
+            sheet = workbook.createSheet("따뚜"); //맨앞시트만 쓰니까 지정해줌
+            fillExcel();
+//            XSSFRow curRow = sheet.createRow(4);
+//            curRow.createCell(MAIN_IMG_COLUMN).setCellValue(bookInfo.getMainImgUrl());
+//            curRow.createCell(SUB_IMG_COLUMN).setCellValue(bookInfo.getSubImgUrl());
+
+            workbook.write(fos); // 작업이 끝난후 해당 workbook객체를 FileOutputStream에 쓰기
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println("오류오류");
+        }
+
     }
 
     void readOriginalFile() {

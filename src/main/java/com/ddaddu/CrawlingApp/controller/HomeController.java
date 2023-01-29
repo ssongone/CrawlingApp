@@ -45,7 +45,7 @@ public class HomeController {
 
         pages.stream();
         ExcelFile excelFile = new ExcelFile(pages); //아직 하나만 가능..ㅎㅎ;;
-        excelFile.makeExcelFile();
+        excelFile.makeNewExcelFile();
         return "redirect:/";
     }
 
