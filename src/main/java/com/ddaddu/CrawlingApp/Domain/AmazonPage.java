@@ -9,6 +9,8 @@ public class AmazonPage {
     private String pageUrl;
     private ImgUrls imgUrls;
     String productInfo;
+    String productName;
+    int productPrice;
 
     public AmazonPage(){}
     public AmazonPage(String pageUrl) {
@@ -39,17 +41,20 @@ public class AmazonPage {
         return productInfo;
     }
 
-    public void setImgUrls() {
-        Crawling crawling = new Crawling(pageUrl);
-        crawling.makeImgUrl();
-        imgUrls = new ImgUrls(crawling.imgUrls);
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getProductPrice() {
+        return productPrice;
     }
 
     public void crawlData() {
         Crawling crawling = new Crawling(pageUrl);
-        imgUrls = new ImgUrls(crawling.imgUrls);
+        imgUrls = new ImgUrls(crawling.getImgUrls());
         productInfo = crawling.getProductInfo();
-        System.out.println("crawling = " + crawling);
+        productName = crawling.getProductName();
+        productPrice = crawling.getProductPrice();
     }
 
 

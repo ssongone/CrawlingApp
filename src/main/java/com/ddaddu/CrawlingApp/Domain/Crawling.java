@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Crawling {
-
-    private String pageUrl;
     private Document document;
-
     private List<ImgUrl> imgUrls;
     private String productInfo;
 
@@ -23,16 +20,11 @@ public class Crawling {
     public Crawling() {}
 
     public Crawling(String pageUrl) {
-        //this.pageUrl = pageUrl;
         connect(pageUrl);
         imgUrls = makeImgUrl();
         productInfo = makeProductInfo();
         productName = takeProductName();
         productPrice = takeProductPrice();
-    }
-
-    public void setPageUrl(String pageUrl) {
-        this.pageUrl = pageUrl;
     }
 
     public List<ImgUrl> getImgUrls() {
@@ -42,8 +34,15 @@ public class Crawling {
         return productInfo;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getProductPrice() {
+        return productPrice;
+    }
+
     void connect(String pageUrl) {
-        this.pageUrl = pageUrl;
         try{
             Connection conn = Jsoup.connect(pageUrl);
             document = conn.get();
@@ -69,17 +68,11 @@ public class Crawling {
         return sum;
     }
 
+
+
     String takeProductDescription() {
         Elements elements = document.select("div[class=\"a-section a-spacing-small a-padding-base\"]");
         return "<h3>Product Description</h3>" + elements.toString();
-//        Elements elements = document.select("div[class=\"a-row a-expander-container a-expander-extend-container\"]");
-//                List<String> collect = elements.stream()
-//                .map(str -> str.toString())
-//                .map(str -> str.replace("h3","h1"))
-//                .collect(Collectors.toList());
-//        elements.stream()
-//                .forEach(str -> System.out.println(str));
-
     }
 
     String takeProductDetails() {

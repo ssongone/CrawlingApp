@@ -21,9 +21,15 @@ public class ExcelFile {
     static final String ORIGIN_FILE_PATH = "/Users/ssongwon/Desktop/springproject/";
     static final String ORIGIN_FILE_NAME = "1월 생활실용서 일괄.xlsx";
     static final String WINDOWS_FILE_PATH = "C:\\Ddaddu App\\";
-    static final int MAIN_IMG_COLUMN = 17; //R
-    static final int SUB_IMG_COLUMN = 18;
-    static final int PRODUCT_INFO_COLUMN = 19;
+    static final String MAC_FILE_PATH = "/Users/ssongwon/Desktop/springproject/";
+    static final int PRODUCT_NAME_COLUMN = 1; //R
+    static final int PRODUCT_PRICE_COLUMN = 2; //R
+
+    static final int MAIN_IMG_COLUMN = 4; //R
+    static final int SUB_IMG_COLUMN = 5;
+    static final int PRODUCT_INFO_COLUMN = 6;
+
+
 
     List<AmazonPage> amazonPages;
 
@@ -34,14 +40,10 @@ public class ExcelFile {
     }
 
     public void makeNewExcelFile() {
-        try(FileOutputStream fos = new FileOutputStream(WINDOWS_FILE_PATH + "따뚜 " +calcCurrentTime()+".xlsx")) {
+        try(FileOutputStream fos = new FileOutputStream(MAC_FILE_PATH + "따뚜 " +calcCurrentTime()+".xlsx")) {
             workbook = new XSSFWorkbook();
             sheet = workbook.createSheet("따뚜"); //맨앞시트만 쓰니까 지정해줌
             fillExcel();
-//            XSSFRow curRow = sheet.createRow(4);
-//            curRow.createCell(MAIN_IMG_COLUMN).setCellValue(bookInfo.getMainImgUrl());
-//            curRow.createCell(SUB_IMG_COLUMN).setCellValue(bookInfo.getSubImgUrl());
-
             workbook.write(fos); // 작업이 끝난후 해당 workbook객체를 FileOutputStream에 쓰기
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -61,10 +63,6 @@ public class ExcelFile {
     public void makeExcelFile() {
         try(FileOutputStream fos = new FileOutputStream(ORIGIN_FILE_PATH + "목록 " +calcCurrentTime()+".xlsx")) {
             fillExcel();
-//            XSSFRow curRow = sheet.createRow(4);
-//            curRow.createCell(MAIN_IMG_COLUMN).setCellValue(bookInfo.getMainImgUrl());
-//            curRow.createCell(SUB_IMG_COLUMN).setCellValue(bookInfo.getSubImgUrl());
-
             workbook.write(fos); // 작업이 끝난후 해당 workbook객체를 FileOutputStream에 쓰기
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -83,6 +81,8 @@ public class ExcelFile {
 
     void createCell(int order, BookInfo bookInfo) {
         XSSFRow curRow = sheet.createRow(order);
+        curRow.createCell(PRODUCT_NAME_COLUMN).setCellValue(bookInfo.getProductName());
+        curRow.createCell(PRODUCT_PRICE_COLUMN).setCellValue(bookInfo.getProductPrice());
         curRow.createCell(MAIN_IMG_COLUMN).setCellValue(bookInfo.getMainImgUrl());
         curRow.createCell(SUB_IMG_COLUMN).setCellValue(bookInfo.getSubImgUrl());
         curRow.createCell(PRODUCT_INFO_COLUMN).setCellValue(bookInfo.getProductInfo());
@@ -92,14 +92,7 @@ public class ExcelFile {
         for (int i = 0; i < amazonPages.size(); i++) {
             AmazonPage page = amazonPages.get(i);
             BookInfo bookInfo = new BookInfo(page);
-            createCell(i + 3, bookInfo);
+            createCell(i + 2, bookInfo);
         }
-// indexOf 함수가 비효율적인 거 같아서 스트림말고 for문을 썼다.
-//        amazonPages.stream()
-//                .forEach(page -> {
-//                    BookInfo bookInfo = new BookInfo(page);
-//                    createCell(amazonPages.indexOf(page)+3, bookInfo);
-//                });
-
     }
 }

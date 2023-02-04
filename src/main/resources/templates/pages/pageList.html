@@ -7,15 +7,17 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>주소</th>
-                <th>이미지주소</th>
+                <th>제품명</th>
+                <th>가격(₩)</th>
+                <th>메인이미지주소</th>
 
             </tr>
             </thead>
             <tbody>
             <tr th:each="page : ${pages}">
                 <td th:text="${page.id}"></td>
-                <td th:text="${page.pageUrl}"></td>
+                <td th:text="${page.productName}"></td>
+                <td th:text="${page.productPrice}"></td>
                 <td th:text="${page.imgUrls.getMainImgUrl()}"></td>
             </tr>
             </tbody>
