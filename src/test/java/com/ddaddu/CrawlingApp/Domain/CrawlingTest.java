@@ -56,4 +56,19 @@ class CrawlingTest {
         Crawling crawling = new Crawling(url);
         crawling.makeProductInfo();
     }
+
+    @Test
+    void 제품명테스트() {
+        Crawling crawling = new Crawling();
+        crawling.connect(url);
+        System.out.println(crawling.takeProductName());
+    }
+
+    @Test
+    void 제품가격테스트() {
+        Crawling crawling = new Crawling();
+        crawling.connect(url);
+        int result = crawling.takeProductPrice();
+        System.out.println(result);
+    }
 }

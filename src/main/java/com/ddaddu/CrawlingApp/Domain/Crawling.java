@@ -12,21 +12,27 @@ import java.util.List;
 public class Crawling {
 
     private String pageUrl;
-    Document document;
+    private Document document;
 
-    List<ImgUrl> imgUrls;
-    String productInfo;
+    private List<ImgUrl> imgUrls;
+    private String productInfo;
+
+    private String productName;
+    private int productPrice;
+
+    public Crawling() {}
 
     public Crawling(String pageUrl) {
-        this.pageUrl = pageUrl;
-        try{
-            Connection conn = Jsoup.connect(pageUrl);
-            document = conn.get();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        //this.pageUrl = pageUrl;
+        connect(pageUrl);
         imgUrls = makeImgUrl();
         productInfo = makeProductInfo();
+        productName = takeProductName();
+        productPrice = takeProductPrice();
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
     }
 
     public List<ImgUrl> getImgUrls() {
@@ -34,6 +40,16 @@ public class Crawling {
     }
     public String getProductInfo() {
         return productInfo;
+    }
+
+    void connect(String pageUrl) {
+        this.pageUrl = pageUrl;
+        try{
+            Connection conn = Jsoup.connect(pageUrl);
+            document = conn.get();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     List<ImgUrl> makeImgUrl() {
@@ -50,13 +66,12 @@ public class Crawling {
 
     String makeProductInfo() {
         String sum = takeProductDescription() + "<br><br>" +takeProductDetails();
-        System.out.println(sum);
         return sum;
     }
 
     String takeProductDescription() {
         Elements elements = document.select("div[class=\"a-section a-spacing-small a-padding-base\"]");
-        return "<h2>Product Description</h2>" + elements.toString();
+        return "<h3>Product Description</h3>" + elements.toString();
 //        Elements elements = document.select("div[class=\"a-row a-expander-container a-expander-extend-container\"]");
 //                List<String> collect = elements.stream()
 //                .map(str -> str.toString())
@@ -70,7 +85,18 @@ public class Crawling {
     String takeProductDetails() {
         //Product Details
         Elements details = document.select("div[id=\"detailBulletsWrapper_feature_div\"] > div[id=\"detailBullets_feature_div\"]");
-        return "<h2>Product Details</h2>" + details.toString();
+        return "<h3>Product Details</h3>" + details.toString();
+    }
+
+    String takeProductName() {
+        return document.select("span[id=\"productTitle\"]").text();
+    }
+
+     int takeProductPrice() {
+        String yenPrice = document.select("span[class=\"a-size-base a-color-price a-color-price\"]").text();
+        int krwPrice = Integer.parseInt(yenPrice.replaceAll("[^0-9]",""));
+        krwPrice =  (int) Math.round(krwPrice * 11 / 10.0) * 10;
+        return krwPrice;
     }
 
 
