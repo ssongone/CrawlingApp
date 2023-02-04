@@ -56,4 +56,9 @@ public class HomeController {
         return "pages/pageList";
     }
 
+    @GetMapping("/delete")
+    public String clear() {
+        pageService.clear();
+        return "redirect:/";
+    }
 }

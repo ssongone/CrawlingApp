@@ -10,4 +10,5 @@ public interface PageRepository {
     AmazonPage save(AmazonPage amazonPage);
     Optional<AmazonPage> findById(Long id);
     List<AmazonPage> findAll();
+    void clearStore();
 }
