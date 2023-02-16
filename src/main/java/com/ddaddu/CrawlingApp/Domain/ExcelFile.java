@@ -40,7 +40,7 @@ public class ExcelFile {
     }
 
     public void makeNewExcelFile() {
-        try(FileOutputStream fos = new FileOutputStream(MAC_FILE_PATH + "따뚜 " +calcCurrentTime()+".xlsx")) {
+        try(FileOutputStream fos = new FileOutputStream(WINDOWS_FILE_PATH + "따뚜 " +calcCurrentTime()+".xlsx")) {
             workbook = new XSSFWorkbook();
             sheet = workbook.createSheet("따뚜"); //맨앞시트만 쓰니까 지정해줌
             fillExcel();

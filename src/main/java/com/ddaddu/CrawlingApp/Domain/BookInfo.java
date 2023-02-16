@@ -8,6 +8,10 @@ public class BookInfo {
     private String mainImgUrl;
     private String subImgUrl;
     private String productInfo;
+
+    final static String INTRO_IMG_HTML = "<img src=\"https://ifh.cc/v-Dz2HRp\">";
+
+
     public BookInfo() { //테스트용
         mainImgUrl = "mainImgUrl 입니다";
         subImgUrl = "subImgUrl 입니다";
@@ -42,8 +46,7 @@ public class BookInfo {
     }
 
     private String addImgTagToInfo(String beforeInfo) {
-        String introImgHtml = "<img src=\"https://ifh.cc/g/4qS32M.jpg\"><img src=\"https://ifh.cc/g/BNTB1P.jpg\"> ";
-        String afterInfo = makeImgSrcTag(mainImgUrl) + "<br><br>" + beforeInfo + "<br><br>" + introImgHtml;
+        String afterInfo = makeImgSrcTag(mainImgUrl) + "<br><br>" + beforeInfo + "<br><br>" + INTRO_IMG_HTML;
         return afterInfo;
     }
 

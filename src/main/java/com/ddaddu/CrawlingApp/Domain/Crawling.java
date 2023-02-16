@@ -64,21 +64,30 @@ public class Crawling {
     }
 
     String makeProductInfo() {
-        String sum = takeProductDescription() + "<br><br>" +takeProductDetails();
+        String sum = takeMainDescription() + takeProductDescription() + takeProductDetails();
         return sum;
     }
 
-
+    String takeMainDescription() {
+        Elements elements = document.select("div[class=\"a-expander-content a-expander-partial-collapse-content\"] > span");
+        if(!validateResult(elements.toString()))
+            return "";
+        return "<h4>" + elements.toString() + "</h4><br><br>";
+    }
 
     String takeProductDescription() {
         Elements elements = document.select("div[class=\"a-section a-spacing-small a-padding-base\"]");
-        return "<h3>Product Description</h3>" + elements.toString();
+        if(!validateResult(elements.toString()))
+            return "";
+        return "<h3>Product Description</h3>" + elements + "<br><br>";
     }
 
     String takeProductDetails() {
         //Product Details
         Elements details = document.select("div[id=\"detailBulletsWrapper_feature_div\"] > div[id=\"detailBullets_feature_div\"]");
-        return "<h3>Product Details</h3>" + details.toString();
+        if(!validateResult(details.toString()))
+            return "";
+        return "<h3>Product Details</h3>" + details+ "<br>";
     }
 
     String takeProductName() {
@@ -87,6 +96,8 @@ public class Crawling {
 
      int takeProductPrice() {
         String yenPrice = document.select("span[class=\"a-size-base a-color-price a-color-price\"]").text();
+        if(!validateResult(yenPrice.toString()))
+            return 0;
         int krwPrice = Integer.parseInt(yenPrice.replaceAll("[^0-9]",""));
         krwPrice =  (int) Math.round(krwPrice * 11 / 10.0) * 10;
         return krwPrice;
@@ -104,4 +115,11 @@ public class Crawling {
         if(imgUrls.size()!=0)
             imgUrls.get(idx).setMainImg(true);
     }
+
+    boolean validateResult(String input) {
+        if(input.length()==0)
+            return false;
+        return true;
+    }
+
 }
